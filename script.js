@@ -1,13 +1,14 @@
 const timerDisplay = document.querySelector('#pomodoro-time');
 const startButton = document.querySelector('#start');
 const resetButton = document.querySelector('#reset');
-const modeButton = document.querySelector('#pomodoro');
+const pomodoroButton = document.querySelector('#pomodoro');
+const breakButton = document.querySelector('#break');
 
 let intervalId;
-let mode = 'pomodoro';
+let mode;
 
 function startTimer() {
-  let time = timerDisplay.textContent.split(':');
+  const time = timerDisplay.textContent.split(':');
   let minutes = parseInt(time[0]);
   let seconds = parseInt(time[1]);
 
@@ -71,8 +72,15 @@ resetButton.addEventListener('click', () => {
   startButton.textContent = 'start';
 });
 
-modeButton.addEventListener('click', () => {
-  mode = mode === 'pomodoro' ? 'break' : 'pomodoro';
+pomodoroButton.addEventListener('click', () => {
+  mode = 'pomodoro';
+  stopTimer();
+  resetTimer();
+  startButton.textContent = 'start';
+});
+
+breakButton.addEventListener('click', () => {
+  mode = 'break';
   stopTimer();
   resetTimer();
   startButton.textContent = 'start';
